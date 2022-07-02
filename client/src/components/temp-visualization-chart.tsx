@@ -10,7 +10,6 @@ import { LinearGradient } from "@visx/gradient";
 import { PatternLines } from "@visx/pattern";
 import AreaChart from "./area-chart";
 import { Brush } from "@visx/brush";
-import { hoursAndMinutes } from "../utils/helper";
 
 interface TempVisualizationChartProps {
   width: number;

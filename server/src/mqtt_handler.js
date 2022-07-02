@@ -44,7 +44,6 @@ export class MqttHandelr {
           } catch (error) {
             console.log(`${error}`.bgRed);
           }
-
           break;
         default:
           break;

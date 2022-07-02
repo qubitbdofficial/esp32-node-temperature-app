@@ -4,7 +4,6 @@ import { AreaClosed } from "@visx/shape";
 import { AxisLeft, AxisBottom, AxisScale } from "@visx/axis";
 import { LinearGradient } from "@visx/gradient";
 import { curveMonotoneX } from "@visx/curve";
-import { hoursAndMinutes } from "../utils/helper";
 
 // Initialize some variables
 const axisColor = "#fff";
