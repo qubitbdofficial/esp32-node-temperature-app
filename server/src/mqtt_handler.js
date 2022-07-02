@@ -1,4 +1,5 @@
 import mqtt from "mqtt";
+import Tempareture from "./db_schema";
 
 export class MqttHandelr {
   constructor() {
@@ -32,10 +33,18 @@ export class MqttHandelr {
     });
 
     // When a message arrives, do magic
-    this.mqttClient.on("message", function (topic, message) {
+    this.mqttClient.on("message", async (topic, message) => {
       switch (topic) {
         case "roomTemp":
-          console.log(JSON.parse(message.toString()));
+          try {
+            // Save the record to mongodb
+            await Tempareture.create({
+              tempareture: message,
+            });
+          } catch (error) {
+            console.log(`${error}`.bgRed);
+          }
+
           break;
         default:
           break;

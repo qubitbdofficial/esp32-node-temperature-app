@@ -1,7 +1,28 @@
-import type { NextPage } from "next";
+import type { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import Head from "next/head";
+import { TempVisualizationChart } from "../components/temp-visualization-chart";
 
-const Home: NextPage = () => {
+export const getStaticProps: GetStaticProps = async (
+  context: GetStaticPropsContext
+) => {
+  try {
+    const res = await fetch("http://localhost:4000/temparetures");
+    const { success, data }: Responsedata = await res.json();
+
+    return {
+      props: { data, success },
+      revalidate: 10,
+    };
+  } catch (error) {
+    return {
+      props: { success: false },
+    };
+  }
+};
+
+const Home: NextPage<Responsedata> = ({ success, data }) => {
+  console.log(data);
+
   return (
     <div>
       <Head>
@@ -10,7 +31,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main></main>
+      <main>{success ? <TempVisualizationChart /> : ""}</main>
     </div>
   );
 };
