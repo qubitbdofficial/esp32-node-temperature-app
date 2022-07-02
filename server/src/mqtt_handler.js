@@ -3,13 +3,13 @@ import mqtt from "mqtt";
 export class MqttHandelr {
   constructor() {
     this.mqttClient = null;
-    this.host = "mqtt://broker.hivemq.com";
+    this.host = process.env.MQTT_HOST;
   }
 
   connect() {
     this.mqttClient = mqtt.connect(this.host, {
-      username: "rafSync_Ad27",
-      password: "12345678",
+      username: process.env.MQTT_USERNAME,
+      password: process.env.MQTT_PASSWORD,
     });
 
     // Mqtt error calback

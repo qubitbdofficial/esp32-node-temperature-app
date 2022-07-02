@@ -1,6 +1,10 @@
 import express from "express";
-import { MqttHandelr } from "./mqtt_handler";
 import cors from "cors";
+import dotenv from "dotenv";
+import { MqttHandelr } from "./mqtt_handler";
+import { connectDB } from "../config/db";
+
+dotenv.config();
 
 const app = express();
 app.use(cors({ origin: "*" }));
@@ -13,4 +17,6 @@ app.get("/", (_, res) => {
   res.json({ msg: "Hello friend" });
 });
 
-app.listen(PORT, () => console.log(""));
+connectDB().then(() => {
+  app.listen(PORT, () => console.log(""));
+});
