@@ -9,13 +9,8 @@ const PORT = process.env.PORT || 4000;
 const mqttClient = new MqttHandelr();
 mqttClient.connect();
 
-app.get("/", (req, res) => {
-  res.json({ msg: "hi" });
+app.get("/", (_, res) => {
+  res.json({ msg: "Hello friend" });
 });
 
-app.post("/send-mqtt", (req, res) => {
-  mqttClient.sendMessage(req.body.message);
-  res.status(200).send("Message sent to mqtt");
-});
-
-app.listen(PORT, () => console.log("App running"));
+app.listen(PORT, () => console.log(""));

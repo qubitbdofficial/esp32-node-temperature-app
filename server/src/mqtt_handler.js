@@ -20,15 +20,26 @@ export class MqttHandelr {
 
     // Connection callback
     this.mqttClient.on("connect", () => {
-      console.log(`mqtt client connected`);
+      // console.log(`mqtt client connected`);
     });
 
-    // mqtt subscriptions
-    this.mqttClient.subscribe("mytopic", { qos: 0 });
+    this.mqttClient.subscribe("roomTemp", (err) => {
+      console.log(err);
+    });
 
-    // When a message arrives, console.log it
+    this.mqttClient.subscribe("reconnect", (err) => {
+      console.log(err);
+    });
+
+    // When a message arrives, do magic
     this.mqttClient.on("message", function (topic, message) {
-      console.log(message.toString());
+      switch (topic) {
+        case "roomTemp":
+          console.log(JSON.parse(message.toString()));
+          break;
+        default:
+          break;
+      }
     });
 
     this.mqttClient.on("close", () => {
